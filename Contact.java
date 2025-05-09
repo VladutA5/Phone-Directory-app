@@ -2,7 +2,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Contact {
-    private int id; // Vom adăuga ID-ul pentru a lucra cu baza de date
+    private int id; 
     private String nume;
     private String numarTelefon;
     private String adresaEmail;
@@ -27,7 +27,7 @@ public class Contact {
         return "ID: " + id + ", Nume: " + nume + ", Telefon: " + numarTelefon + ", Email: " + adresaEmail;
     }
 
-    // Creează un obiect Contact dintr-un ResultSet
+
     public static Contact fromResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String nume = rs.getString("nume");

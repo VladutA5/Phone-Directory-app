@@ -55,7 +55,7 @@ public class ContactDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                contacte.add(Contact.fromResultSet(rs));  // Creăm un obiect Contact din ResultSet
+                contacte.add(Contact.fromResultSet(rs));  
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

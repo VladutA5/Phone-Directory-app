@@ -21,7 +21,7 @@ public class AgendaGUI extends JFrame {
         configureWindow();
         initializeUI();
         addInputValidation();
-        actualizeazaTabel(); // Încarcă datele inițiale
+        actualizeazaTabel(); 
     }
 
     private void configureWindow() {
@@ -37,7 +37,7 @@ public class AgendaGUI extends JFrame {
         add(createHeaderPanel(), BorderLayout.NORTH);
         add(createMenuPanel(), BorderLayout.WEST);
 
-        // Panou central split între formular și tabel
+    
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                 createFormPanel(),
                 createTabelPanel()
@@ -80,7 +80,7 @@ public class AgendaGUI extends JFrame {
         JPanel panelTabel = new JPanel(new BorderLayout());
         panelTabel.setBackground(BACKGROUND_COLOR);
 
-        // Creare model tabel
+      
         String[] coloane = {"ID", "Nume", "Telefon", "Email"};
         modelTabel = new DefaultTableModel(coloane, 0) {
             @Override
@@ -127,7 +127,7 @@ public class AgendaGUI extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Rând 1
+    
         gbc.gridx = 0; gbc.gridy = 0;
         panelFormular.add(createLabel("Nume:"), gbc);
 
@@ -135,7 +135,7 @@ public class AgendaGUI extends JFrame {
         tfNume = new JTextField(20);
         panelFormular.add(tfNume, gbc);
 
-        // Rând 2
+   
         gbc.gridx = 0; gbc.gridy = 1;
         panelFormular.add(createLabel("Telefon:"), gbc);
 
@@ -143,7 +143,7 @@ public class AgendaGUI extends JFrame {
         tfTelefon = new JTextField(20);
         panelFormular.add(tfTelefon, gbc);
 
-        // Rând 3
+  
         gbc.gridx = 0; gbc.gridy = 2;
         panelFormular.add(createLabel("Email:"), gbc);
 
@@ -151,7 +151,7 @@ public class AgendaGUI extends JFrame {
         tfEmail = new JTextField(20);
         panelFormular.add(tfEmail, gbc);
 
-        // Rând 4
+
         gbc.gridx = 0; gbc.gridy = 3;
         panelFormular.add(createLabel("Căutare:"), gbc);
 
@@ -171,8 +171,8 @@ public class AgendaGUI extends JFrame {
 
 
     private void actualizeazaTabel() {
-        modelTabel.setRowCount(0); // Șterge toate rândurile existente
-        List<Contact> contacte = agenda.getToateContactele(); // Trebuie adăugată această metodă în AgendaTelefonica
+        modelTabel.setRowCount(0); 
+        List<Contact> contacte = agenda.getToateContactele(); 
         for (Contact contact : contacte) {
             modelTabel.addRow(new Object[]{
                     contact.getId(),
@@ -184,7 +184,7 @@ public class AgendaGUI extends JFrame {
     }
 
     private void addInputValidation() {
-        // Validare pentru câmpul nume (doar litere și spații)
+   
         tfNume.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -198,7 +198,7 @@ public class AgendaGUI extends JFrame {
             }
         });
 
-        // Validare pentru câmpul telefon (doar cifre)
+       
         tfTelefon.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -218,7 +218,7 @@ public class AgendaGUI extends JFrame {
         String telefon = tfTelefon.getText().trim();
         String email = tfEmail.getText().trim();
 
-        // Validări suplimentare
+
         if (nume.isEmpty() || telefon.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Toate câmpurile sunt obligatorii!",
@@ -227,7 +227,7 @@ public class AgendaGUI extends JFrame {
             return;
         }
 
-        // Validare format nume
+
         if (!nume.matches("[a-zA-Z ]+")) {
             JOptionPane.showMessageDialog(this,
                     "Numele poate conține doar litere și spații!",
@@ -236,7 +236,7 @@ public class AgendaGUI extends JFrame {
             return;
         }
 
-        // Validare format telefon
+
         if (!telefon.matches("\\d+")) {
             JOptionPane.showMessageDialog(this,
                     "Numărul de telefon poate conține doar cifre!",
@@ -245,7 +245,7 @@ public class AgendaGUI extends JFrame {
             return;
         }
 
-        // Validare lungime minimă pentru nume și telefon
+      
         if (nume.length() < 3) {
             JOptionPane.showMessageDialog(this,
                     "Numele trebuie să conțină cel puțin 3 caractere!",
@@ -262,7 +262,7 @@ public class AgendaGUI extends JFrame {
             return;
         }
 
-        // Validare format email
+     
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             JOptionPane.showMessageDialog(this,
                     "Adresa de email nu este validă!",
@@ -292,7 +292,7 @@ public class AgendaGUI extends JFrame {
         String telefonNou = tfTelefon.getText().trim();
         String emailNou = tfEmail.getText().trim();
 
-        // Validări similare ca la adăugare
+       
         if (numeNou.isEmpty() || telefonNou.isEmpty() || emailNou.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Toate câmpurile sunt obligatorii!",
@@ -378,7 +378,7 @@ public class AgendaGUI extends JFrame {
             return;
         }
 
-        Contact contact = agenda.cautaContactSiReturneaza(numeCautat); // Trebuie adăugată această metodă
+        Contact contact = agenda.cautaContactSiReturneaza(numeCautat); 
         if (contact != null) {
             modelTabel.setRowCount(0);
             modelTabel.addRow(new Object[]{
@@ -389,7 +389,7 @@ public class AgendaGUI extends JFrame {
             });
         } else {
             JOptionPane.showMessageDialog(this, "Contactul nu a fost găsit!", "Informație", JOptionPane.INFORMATION_MESSAGE);
-            actualizeazaTabel(); // Reafișează toate contactele
+            actualizeazaTabel(); 
         }
     }
 
